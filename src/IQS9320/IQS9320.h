@@ -27,7 +27,7 @@
 
 // Include Files
 #include "Arduino.h"
-#include "azq_i2c.h"
+#include "Wire.h"
 #include "./inc/iqs9320_addresses.h"
 
 /* Select the version of IQS9320 used */
@@ -37,6 +37,14 @@
 /* Choose to ATI on start-up or read the Mirror selection and disable ATI (should be true for IQS9320 v0.3 or less) */
 #define IQS9320_RESET_ON_STARTUP        false
 #define IQS9320_I2C_RETRY               10
+
+// Public Global Definitions
+/* For use with Wire.h library. True argument with some functions closes the
+   I2C communication window.*/
+#define STOP    true
+/* For use with Wire.h library. False argument with some functions keeps the
+   I2C communication window open. */
+#define RESTART false
 
 // Device Info
 #define IQS9320_PRODUCT_NUM             1814
@@ -202,7 +210,7 @@ public:
         bool new_data_available;
 
         // Public Methods
-        void begin(uint8_t deviceAddressIn, pin_size_t mclr_pin, uint8_t nChannels);
+        void begin(uint8_t deviceAddressIn, uint8_t mclr_pin, uint8_t nChannels);
         bool init(void);
         void run(void);
         void queueValueUpdates(void);
@@ -242,7 +250,7 @@ private:
         // Private Variables
         uint8_t _deviceAddress;
         uint8_t _nChannels;
-        pin_size_t _mclr_pin;
+        uint8_t _mclr_pin;
         bool _debug_en;
 
         // Private Methods

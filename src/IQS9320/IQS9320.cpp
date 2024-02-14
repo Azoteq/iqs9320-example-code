@@ -69,7 +69,7 @@ IQS9320::IQS9320(){
   *         - If communication is successfully established then it is unlikely
   *           that initialization will fail.
 */
-void IQS9320::begin(uint8_t deviceAddressIn, pin_size_t mclr_pin, uint8_t nChannels)
+void IQS9320::begin(uint8_t deviceAddressIn, uint8_t mclr_pin, uint8_t nChannels)
 {
   // Initialize I2C communication here, since this library can't function without it.
   Wire.begin();

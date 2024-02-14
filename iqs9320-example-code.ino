@@ -21,8 +21,8 @@
  *                  - Power Mode Feedback                                     *
  *                                                                            *
  * @author      Azoteq PTY Ltd                                                *
- * @version     v1.2                                                          *
- * @date        2024-02-13                                                    *
+ * @version     v1.4                                                          *
+ * @date        2024-02-14                                                    *
  *****************************************************************************/
 
 #include <Arduino.h>
@@ -30,8 +30,8 @@
 
 /*** Defines ***/
 #define DEMO_IQS9320_ADDR                      0x3E
-#define DEMO_IQS9320_POWER_PIN                 0
-#define DEMO_IQS9320_MCLR_PIN                  2
+#define DEMO_IQS9320_POWER_PIN                 4
+#define DEMO_IQS9320_MCLR_PIN                  5
 #define DEMO_IQS9320_NR_CHANNELS               20
 #define DEMO_IQS9320_SAMPLE_TIME               10
 
