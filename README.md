@@ -77,4 +77,4 @@ Source: [Pro Micro Hookup Guide](https://learn.sparkfun.com/tutorials/pro-micro-
 ## Serial Communication and Interface
 The example code provides verbose serial feedback to aid users in the demonstration of start-up and operational functions. A successful initialization process will show the following over serial:
 
-![iqs323_successful_serial](docs/images/iqs323_successful_serial.png)
+![iqs9320_successful_serial](docs/images/iqs9320_successful_serial.png)

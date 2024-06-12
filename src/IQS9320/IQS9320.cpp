@@ -16,8 +16,8 @@
  *              provides an easy means of initializing and interacting with   *
  *              the IQS9320 device from an Arduino-based device.              *
  * @author      JN. Lochner - Azoteq PTY Ltd                                  *
- * @version     v0.0.0                                                        *
- * @date        2023                                                          *
+ * @version     v1.5.3                                                        *
+ * @date        2024                                                          *
  * ========================================================================== *
  * @attention  Makes use of the following standard Arduino libraries:         *
  * - Arduino.h -> Included in IQS9320.h, comes standard with Arduino          *
@@ -28,6 +28,10 @@
 #include "IQS9320.h"
 
 /* Load the IQS9320 Settings */
+#ifdef IQS9320_V1_0
+#include "IQS9320_v1_0_init.h"
+#endif
+
 #ifdef IQS9320_V0_7
 #include "IQS9320_v0_7_init.h"
 #endif
@@ -341,7 +345,7 @@ void IQS9320::queueValueUpdates(void)
 {
   uint8_t transferBytes[40];	// The array which will hold the bytes to be transferred.
 
-  #ifdef IQS9320_V0_7
+  #if defined(IQS9320_V0_7) || defined(IQS9320_V1_0)
   uint8_t bytes_per_field = 4;  // Calculate how many bytes is required to fit all the channels
   uint8_t total_bytes = 2+(3*bytes_per_field); // Calculate the total bytes to read
   #endif
@@ -360,7 +364,7 @@ void IQS9320::queueValueUpdates(void)
 
   for(uint8_t i = 0; i < bytes_per_field; i++)
   {
-    #ifdef IQS9320_V0_7
+    #if defined(IQS9320_V0_7) || defined(IQS9320_V1_0)
       /* Assign the ATI Error Flags */
       IQSMemoryMap.ATI_ERROR[i] =  transferBytes[2+i];
       /* Assign the Filter Halt Flags */
@@ -748,6 +752,7 @@ void IQS9320::updateSettings(bool stopOrRestart)
   writeRandomBytes16(_deviceAddress, IQS9320_MM_MIRROR_SELECTION_CH10, 20, transferBytes, STOP);
   Serial.println("\t\t3. Write Mirror Selection CH 10-19");
 
+  #if defined(IQS9320_V0_7) || defined(IQS9320_V0_4)
   /* Change the Calibration Parameters CH 0-9 */
   /* Memory Map Position 0x3028 - 0x3031 */
   transferBytes[0]  = CALIB_STEP_CH0;
@@ -797,6 +802,7 @@ void IQS9320::updateSettings(bool stopOrRestart)
   transferBytes[19] = CALIB_CORRECT_CH19;
   writeRandomBytes16(_deviceAddress, IQS9320_MM_CALIBRATION_PARAMETERS_CH10, 20, transferBytes, STOP);
   Serial.println("\t\t5. Write Calibration Parameters CH 10-19");
+  #endif
 
   /* Change the Effective Max Delta CH 0-9 */
   /* Memory Map Position 0x3050 - 0x3059 */
@@ -965,7 +971,7 @@ void IQS9320::updateSettings(bool stopOrRestart)
   writeRandomBytes16(_deviceAddress, IQS9320_MM_ACTIVATION_HYSTERESIS, 1, transferBytes, STOP);
   Serial.println("\t\t16. Write Activation Hysteresis");
 
-  #ifdef IQS9320_V0_7
+  #if defined(IQS9320_V0_7) || defined(IQS9320_V1_0)
   /* Change the Timing Generator Settings */
   /* Memory Map Position 0x3146 - 0x3147 */
   transferBytes[0]  = TIMING_GENERATOR_0;

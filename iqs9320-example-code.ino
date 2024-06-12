@@ -21,8 +21,8 @@
  *                  - Power Mode Feedback                                     *
  *                                                                            *
  * @author      Azoteq PTY Ltd                                                *
- * @version     v1.4                                                          *
- * @date        2024-02-14                                                    *
+ * @version     v1.5                                                          *
+ * @date        2024-06-10                                                    *
  *****************************************************************************/
 
 #include <Arduino.h>
@@ -44,6 +44,14 @@ iqs9320_power_mode_e power_mode = IQS9320_NORMAL_POWER;
 uint32_t demo_sample_timer = 0;
 
 /* Channel layout for the keys on EV-Kit */
+#ifdef IQS9320_V1_0
+uint8_t ch_seq[DEMO_IQS9320_NR_CHANNELS] = {8,  18, 7,  17,
+                                            19, 9,  6,  16,
+                                            2,  11, 14, 5,
+                                            10, 0,  4,  15,
+                                            1,  12, 13, 3};
+#endif
+
 #ifdef IQS9320_V0_7
 uint8_t ch_seq[DEMO_IQS9320_NR_CHANNELS] = {8,  18, 7,  17,
                                             19, 9,  6,  16,

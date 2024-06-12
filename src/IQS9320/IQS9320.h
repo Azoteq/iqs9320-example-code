@@ -10,16 +10,16 @@
  *                           E-mail: info@azoteq.com                          *
  *                                                                            *
  * ========================================================================== *
- * @file        IQS9320.h                                                      *
- * @brief       This file contains all the necessary settings for the IQS9320  *
+ * @file        IQS9320.h                                                     *
+ * @brief       This file contains all the necessary settings for the IQS9320 *
  *              and this file can be changed from the GUI or edited here      *
  * @author      JN. Lochner - Azoteq PTY Ltd                                  *
- * @version     v1.5.2                                                        *
- * @date        2023                                                          *
+ * @version     v1.5.3                                                        *
+ * @date        2024                                                          *
  * ========================================================================== *
  * @attention  Makes use of the following standard Arduino libraries:         *
- * - Arduino.h -> Included in IQS9320.h, comes standard with Arduino           *
- * - Wire.h    -> Included in IQS9320.h, comes standard with Arduino           *
+ * - Arduino.h -> Included in IQS9320.h, comes standard with Arduino          *
+ * - Wire.h    -> Included in IQS9320.h, comes standard with Arduino          *
  ******************************************************************************/
 
 #ifndef IQS9320_H
@@ -32,7 +32,8 @@
 
 /* Select the version of IQS9320 used */
 // #define IQS9320_V0_4
-#define IQS9320_V0_7
+// #define IQS9320_V0_7
+#define IQS9320_V1_0
 
 /* Choose to ATI on start-up or read the Mirror selection and disable ATI (should be true for IQS9320 v0.3 or less) */
 #define IQS9320_RESET_ON_STARTUP        false
@@ -66,7 +67,7 @@
 #define IQS9320_MM_REFERENCE_HALT_TIMEOUT       0x311C
 #define IQS9320_MM_ACTIVATION_HYSTERESIS        0x311D
 #endif
-#ifdef IQS9320_V0_7
+#if defined(IQS9320_V0_7) || defined(IQS9320_V1_0)
 #define IQS9320_MM_ACTIVATION_FLAGS             0x100A
 #define IQS9320_MM_REFERENCE_HALT_FLAGS         0x1006
 #define IQS9320_MM_CH0_NORM_DELTA               0x100E
